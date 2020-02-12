@@ -25,6 +25,6 @@ public class UserController {
     @ResponseBody
     public Object test(){
 
-        return userMapper.selectById("1");
+        return userMapper.selectById(1L);
     }
 }

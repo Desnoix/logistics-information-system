@@ -47,6 +47,6 @@ pagehelper:
 
 mybatis:
   # mapper.xml包地址
-  mapper-locations: classpath:mapper/user/*.xml
+  mapper-locations: classpath:mapper/**/*.xml
   # pojo生成包地址
   type-aliases-package: com.yjq.user.pojo
