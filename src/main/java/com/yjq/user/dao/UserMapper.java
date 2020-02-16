@@ -10,4 +10,8 @@ public interface UserMapper {
     User selectById(@Param("id")Long id);
 
     User selectByNameAndPw(@Param("username")String username, @Param("password") String password);
+
+    User findByUsername(@Param("username") String username);
+
+    Integer addUser(User user);
 }

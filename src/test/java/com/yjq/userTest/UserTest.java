@@ -1,7 +1,8 @@
 package com.yjq.userTest;
 
-import com.yjq.user.service.UserDetailsService;
-import com.yjq.user.service.impl.UserDetailsServiceImpl;
+import com.yjq.user.pojo.User;
+import com.yjq.user.service.UserService;
+import com.yjq.user.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,9 +18,23 @@ public class UserTest {
 
     @Test
     void test(){
-        UserDetailsService userDetailsService = new UserDetailsServiceImpl();
-        boolean result = userDetailsService.findUser("123", "123");
-        System.out.println(result);
+        UserService userService= new UserServiceImpl();
+        User user = new User();
+        user.setName("123");
+        user.setPassword("123");
+        user.setRole("USER");
+
+        String s = userService.addUser(user);
+        System.out.println(s);
+
+    }
+    @Test
+    void testMapper(){
+        UserService userService= new UserServiceImpl();
+
+        User s = userService.findUser("123");
+        System.out.println(s.toString());
+
     }
 
 }

@@ -18,9 +18,15 @@
   <select id="selectById" parameterType="java.lang.Long" resultType="com.yjq.user.pojo.User">
     select * from user where id = #{id}
   </select>
-  <select id="selectByNameAndPw" parameterType="java.lang.Long" resultType="com.yjq.user.pojo.User">
+  <select id="selectByNameAndPw"  resultType="com.yjq.user.pojo.User">
     select * from user where name = #{username} AND password = #{password}
   </select>
+  <select id="findByUsername"  resultType="com.yjq.user.pojo.User">
+    select * from user where name = #{username}
+  </select>
+  <insert id="addUser" parameterType="com.yjq.user.pojo.User" useGeneratedKeys="true" keyProperty="id">
+    insert into user(`NAME`,`PASSWORD`,`ROLE`) VALUES (#{name},#{password},#{role})
+  </insert>
 
 
 

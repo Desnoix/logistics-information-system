@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 @PropertySource(value = "classpath:application.yml")
 public class DruidConfiguration {
 
-    @Bean(destroyMethod = "close", initMethod = "init")
+    @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource druidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();

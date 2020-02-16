@@ -1,11 +1,11 @@
 package com.yjq.user.controller;
 
-import com.yjq.user.dao.UserMapper;
+import com.yjq.user.pojo.User;
+import com.yjq.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.annotation.Resource;
 
 /**
  * @ClassName UserController
@@ -17,14 +17,18 @@ import javax.annotation.Resource;
 @Controller
 public class UserController {
 
-    @Resource
-    UserMapper userMapper;
+    @Autowired
+    UserService userService;
 
 
     @RequestMapping("/test")
     @ResponseBody
     public Object test(){
 
-        return userMapper.selectById(1L);
+        User user = new User();
+        user.setName("456");
+        user.setPassword("789");
+        user.setRole("USER");
+        return userService.addUser(user);
     }
 }
