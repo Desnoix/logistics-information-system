@@ -17,7 +17,7 @@ import java.util.HashMap;
  */
 public class JwtTokenUtils {
 
-    public static final String TOKEN_HEADER = "token";
+    public static final String TOKEN_HEADER = "Authorization";
     public static final String TOKEN_PREFIX = "Bearer ";
 
     private static final String SECRET = "jwtsecret";

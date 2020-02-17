@@ -63,6 +63,15 @@ public class ResultVO implements Serializable {
         map.put("success",true);
         return map;
     }
+    public final static  Map<String, Object> success(Object data) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("jwtToken",null);
+        map.put("code", ResultEnum.SUCCESS.getCode());
+        map.put("message", ResultEnum.SUCCESS.getMessage());
+        map.put("data", data);
+        map.put("success",true);
+        return map;
+    }
 
     public final static  Map<String, Object> failure(int code, String message,Object data) {
         Map<String, Object> map = new HashMap<String, Object>();

@@ -52,7 +52,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             response.getWriter().flush();
             return;
         }
-        super.doFilterInternal(request, response, chain);
+        super.  doFilterInternal(request, response, chain);
     }
 
     // 这里从token中获取用户信息

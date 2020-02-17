@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @ClassName JWTAuthenticationFilter
@@ -31,7 +33,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-        super.setFilterProcessesUrl("/auth/login");
+        super.setFilterProcessesUrl("/login");
     }
 
     @Override
@@ -60,6 +62,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
 
+        Map<String,Object> data= new HashMap<>();
         JwtUser jwtUser = (JwtUser) authResult.getPrincipal();
         //System.out.println("jwtUser:" + jwtUser.toString());
         boolean isRemember = rememberMe.get() == 1;
@@ -75,12 +78,19 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 返回创建成功的token
         // 但是这里创建的token只是单纯的token
         // 按照jwt的规定，最后请求的时候应该是 `Bearer token`
-        response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
+        //response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
+        data.put("token",JwtTokenUtils.TOKEN_PREFIX + token);
+        request.setAttribute("data",data);
+        request.getRequestDispatcher("/common/successLoginToJson").forward(request, response);
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        response.getWriter().write("身份认证错误, 原因: " + failed.getMessage());
+        Map<String,Object> data= new HashMap<>();
+        data.put("message",failed.getMessage());
+
+        request.setAttribute("data",data);
+        request.getRequestDispatcher("/common/failureToJson").forward(request, response);
     }
 
 }
