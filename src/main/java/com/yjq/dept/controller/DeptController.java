@@ -8,9 +8,11 @@ import com.yjq.dept.service.DeptService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,8 +43,12 @@ public class DeptController extends BaseController {
     @ApiOperation("获取所有部门")
     @GetMapping
     public Map<String, Object> selectAll(){
-        System.out.println(deptService.selectAll());
         return ResultVO.success(deptService.selectAll());
+    }
+    @ApiOperation("根据id获取部门")
+    @GetMapping("/{deptId}")
+    public Map<String, Object> selectByDeptId(@PathVariable("deptId")Integer id){
+        return ResultVO.success(deptService.selectByDeptId(id));
     }
 
     @ApiOperation("根据id删除指定部门")
@@ -54,8 +60,19 @@ public class DeptController extends BaseController {
 
     @ApiOperation("更新单个部门信息")
     @PutMapping
-    public Map<String,Object> updateDept(@RequestBody @Validated Department dept){
+    public Map<String,Object> updateDept(@RequestBody @Validated Department dept ){
         int i = deptService.updateDept(dept);
         return toResult(i);
+    }
+
+    @ApiOperation("根据部门名称获取部门信息")
+    @GetMapping("selectByName")
+    public Map<String,Object> selectByName(@Validated Department dept){
+        List<Department> department = deptService.selectByname(dept);
+        if(StringUtils.isEmpty(dept.getDeptName()) ){
+            return ResultVO.success(deptService.selectAll());
+        }else{
+            return ResultVO.success(department);
+        }
     }
 }

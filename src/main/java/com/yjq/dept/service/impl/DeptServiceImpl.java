@@ -37,6 +37,10 @@ public class DeptServiceImpl implements DeptService {
         return departmentMapper.selectAll();
     }
 
+    @Override
+    public Department selectByDeptId(Integer id) {
+        return departmentMapper.selectByDeptId(id);
+    }
 
     @Override
     public int updateDept(Department dept) {
@@ -50,8 +54,11 @@ public class DeptServiceImpl implements DeptService {
 
     @Override
     public boolean checkDeptNameUnique(Department dept) {
-        Department department = departmentMapper.selectByDeptName(dept);
+        List<Department> department = departmentMapper.selectByDeptName(dept);
         return StringUtils.isEmpty(department);
     }
-
+    @Override
+    public List<Department> selectByname(Department deptName) {
+        return departmentMapper.selectByDeptName(deptName);
+    }
 }

@@ -19,7 +19,7 @@ public interface DepartmentMapper {
      * @param dept
      * @return
      */
-    public Department selectByDeptName(Department dept);
+    public List<Department> selectByDeptName(Department dept);
 
     /**
      *

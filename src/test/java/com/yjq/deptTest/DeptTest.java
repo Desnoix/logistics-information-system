@@ -36,7 +36,7 @@ public class DeptTest {
     public void test2(){
         Department department = new Department();
         department.setDeptName("2311232");
-        Department department1 = departmentMapper.selectByDeptName(department);
+        List<Department> department1 = departmentMapper.selectByDeptName(department);
         System.out.println(StringUtils.isEmpty(department1));
     }
     @Test
@@ -58,5 +58,12 @@ public class DeptTest {
     public void test5(){
         List<Department> department1 = departmentMapper.selectAll();
         System.out.println(department1);
+    }
+    @Test
+    public void test6(){
+        Department department = new Department();
+        department.setDeptName("asdsa");
+        List<Department> department1 = deptService.selectByname(department);
+        System.out.println(department1.toString());
     }
 }

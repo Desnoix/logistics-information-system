@@ -23,6 +23,10 @@ public interface DeptService {
      */
     public List<Department> selectAll();
     /**
+     * 根据Id获取部门
+     */
+    public Department selectByDeptId(Integer id);
+    /**
      * 修改保存部门信息
      *
      * @param dept 部门信息
@@ -44,4 +48,11 @@ public interface DeptService {
      * @return 结果
      */
     public boolean checkDeptNameUnique(Department dept);
+
+    /**
+     * 根据名字查询部门
+     * @param deptName
+     * @return
+     */
+    public List<Department> selectByname(Department deptName);
 }
