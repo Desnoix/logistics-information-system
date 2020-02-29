@@ -24,4 +24,13 @@ public interface UserService {
      * @return
      */
     public String addUser(User user);
+
+    /**
+     * 校验用户名称是否唯一
+     *
+     * @param userName 用户名称
+     * @return 结果
+     */
+    public boolean checkUserNameUnique(String userName);
+
 }

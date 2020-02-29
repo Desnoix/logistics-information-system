@@ -25,7 +25,6 @@ public class ResultVO implements Serializable {
      */
     public final static Map<String, Object> success(String message, Object data, String jwtToken, Boolean success) {
         Map<String, Object> map = new HashMap<>();
-        map.put("jwtToken",jwtToken);
         map.put("code", ResultEnum.SUCCESS.getCode());
         map.put("message", message);
         map.put("success",success);
@@ -33,22 +32,6 @@ public class ResultVO implements Serializable {
         return map;
     }
 
-    /**
-     * 返回object，以及token
-     * 返回的msg，code为默认
-     * @param data
-     * @param jwtToken
-     * @return
-     */
-    public final static  Map<String, Object> success(Object data,String jwtToken) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("jwtToken",jwtToken);
-        map.put("code", ResultEnum.SUCCESS.getCode());
-        map.put("message", ResultEnum.SUCCESS.getMessage());
-        map.put("data", data);
-        map.put("success",true);
-        return map;
-    }
 
     /**
      * 返回默认的信息
@@ -56,7 +39,6 @@ public class ResultVO implements Serializable {
      */
     public final static  Map<String, Object> success() {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("jwtToken",null);
         map.put("code", ResultEnum.SUCCESS.getCode());
         map.put("message", ResultEnum.SUCCESS.getMessage());
         map.put("data", null);
@@ -65,7 +47,6 @@ public class ResultVO implements Serializable {
     }
     public final static  Map<String, Object> success(Object data) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("jwtToken",null);
         map.put("code", ResultEnum.SUCCESS.getCode());
         map.put("message", ResultEnum.SUCCESS.getMessage());
         map.put("data", data);
@@ -86,6 +67,14 @@ public class ResultVO implements Serializable {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", code);
         map.put("message", message);
+        map.put("data", null);
+        map.put("success",false);
+        return map;
+    }
+    public final static  Map<String, Object> failure() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", ResultEnum.FAILURE.getCode());
+        map.put("message", ResultEnum.FAILURE.getMessage());
         map.put("data", null);
         map.put("success",false);
         return map;

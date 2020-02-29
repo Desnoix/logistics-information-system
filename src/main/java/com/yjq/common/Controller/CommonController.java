@@ -23,7 +23,7 @@ public class CommonController {
     @ResponseBody
     public Map<String, Object> successToJson(HttpServletRequest request) {
         Map<String, Object> data = (Map<String, Object>) request.getAttribute("data");
-        Map<String, Object> success = ResultVO.success(null, (String) data.get("token"));
+        Map<String, Object> success = ResultVO.success( (String) data.get("token"));
         return success;
     }
     @RequestMapping("/common/failureToJson")

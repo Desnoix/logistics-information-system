@@ -13,6 +13,7 @@
     <result column="ACCOUNT" jdbcType="VARCHAR" property="account" />
     <result column="EMAIL" jdbcType="VARCHAR" property="email" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
   </resultMap>
 
   <select id="selectById" parameterType="java.lang.Long" resultType="com.yjq.user.pojo.User">
@@ -25,7 +26,7 @@
     select * from user where name = #{username}
   </select>
   <insert id="addUser" parameterType="com.yjq.user.pojo.User" useGeneratedKeys="true" keyProperty="id">
-    insert into user(`NAME`,`PASSWORD`,`ROLE`) VALUES (#{name},#{password},#{role})
+    insert into user(`NAME`,`PASSWORD`,`ROLE`,`CREATE_TIME`) VALUES (#{name},#{password},#{role},#{createTime})
   </insert>
 
 

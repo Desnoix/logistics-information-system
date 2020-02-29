@@ -30,7 +30,7 @@ public class SwaggerConfig {
 
     private final String licenseUrl = "https://mit-license.org/";
 
-    private final Contact contact = new Contact("yjq", "https://github.com/calebman", "gdmz_jqyang@outlook.com");
+    private final Contact contact = new Contact("yjq", "https://github.com/desnoix", "gdmz_jqyang@outlook.com");
 
     @Bean
     public Docket buildDocket() {

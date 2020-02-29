@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yjq.dept.dao.DepartmentMapper">
+
+    <resultMap id="BaseResultMap" type="com.yjq.dept.pojo.Department">
+        <result column="ID" jdbcType="INTEGER" property="id"/>
+        <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName"/>
+        <result column="STATUS" jdbcType="INTEGER" property="status"/>
+        <result column="DELETED" jdbcType="INTEGER" property="deleted"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="LEADER" jdbcType="VARCHAR" property="leader"/>
+        <result column="PHONE" jdbcType="VARCHAR" property="phone"/>
+        <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
+    </resultMap>
+
+    <insert id="addDept" parameterType="com.yjq.dept.pojo.Department">
+        INSERT INTO deptartment(`id`,`dept_name`,`status`,`deleted`,`create_time`,`LEADER`,`PHONE`,`EMAIL`)
+        VALUES (#{id},#{deptName},#{status},#{deleted},#{createTime},#{leader},#{phone},#{email})
+    </insert>
+
+    <select id="selectByDeptName" parameterType="com.yjq.dept.pojo.Department" resultMap="BaseResultMap">
+        SELECT * FROM deptartment WHERE DEPT_NAME = #{deptName}
+    </select>
+    <select id="selectByDeptId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT * FROM deptartment WHERE ID = #{id}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM deptartment WHERE DELETED = 0
+    </select>
+
+    <update id="updateDept" parameterType="com.yjq.dept.pojo.Department" >
+        UPDATE deptartment
+        <set>
+            <if test="deptName !=null and deptName != ''"> DEPT_NAME = #{deptName},</if>
+            <if test="status !=null"> STATUS = #{status},</if>
+            <if test="deleted !=null"> DELETED = #{deleted},</if>
+            <if test="leader !=null"> DELETED = #{leader},</if>
+            <if test="phone !=null"> DELETED = #{phone},</if>
+            <if test="email !=null"> DELETED = #{email},</if>
+        </set>
+        WHERE ID = #{id}
+    </update>
+
+    <update id="deleteDeptById" parameterType="java.lang.Integer">
+        UPDATE deptartment SET DELETED = 1 WHERE ID = #{deptId}
+    </update>
+    <update id="restoreDeptById" parameterType="java.lang.Integer">
+        UPDATE deptartment SET DELETED = 0 WHERE ID = #{deptId}
+    </update>
+
+
+</mapper>

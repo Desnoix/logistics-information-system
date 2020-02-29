@@ -1,5 +1,7 @@
 package com.yjq.user.pojo;
 
+import java.util.Date;
+
 public class User {
 
     private Integer id;
@@ -21,7 +23,21 @@ public class User {
 
     private String role;
 
+    private Integer deptId;
+
+    private Integer deleted;
+
+    private Date createTime;
+
     public User() {
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getRole() {
@@ -89,5 +105,21 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
+
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
     }
 }

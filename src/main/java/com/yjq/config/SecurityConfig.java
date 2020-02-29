@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     //.antMatchers(HttpMethod.DELETE, "/tasks/**").hasRole("ADMIN")
                     // 测试用资源，需要验证了的用户才能访问
                     .antMatchers("/tasks/**").authenticated()
+                    .antMatchers("/user/**").authenticated()
                     // 其他都放行了
                     .anyRequest().permitAll()
                 .and()

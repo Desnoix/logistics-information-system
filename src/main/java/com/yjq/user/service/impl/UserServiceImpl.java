@@ -57,4 +57,15 @@ public class UserServiceImpl implements UserService {
 
         return "插入成功";
     }
+
+    @Override
+    public boolean checkUserNameUnique(String userName)
+    {
+        int count = userMapper.checkUserNameUnique(userName);
+        if (count > 0)
+        {
+            return false;
+        }
+        return true;
+    }
 }

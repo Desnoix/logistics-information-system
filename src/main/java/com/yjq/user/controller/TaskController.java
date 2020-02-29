@@ -2,6 +2,7 @@ package com.yjq.user.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * @ClassName TaskController
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/tasks")
+@ApiIgnore
 public class TaskController {
 
     @GetMapping

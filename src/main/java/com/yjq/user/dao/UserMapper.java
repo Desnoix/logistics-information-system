@@ -7,11 +7,19 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UserMapper {
 
-    User selectById(@Param("id")Long id);
+    public User selectById(@Param("id")Long id);
 
-    User selectByNameAndPw(@Param("username")String username, @Param("password") String password);
+    public User selectByNameAndPw(@Param("username")String username, @Param("password") String password);
 
-    User findByUsername(@Param("username") String username);
+    public User findByUsername(@Param("username") String username);
 
-    Integer addUser(User user);
+    public Integer addUser(User user);
+
+    /**
+     * 校验用户名称是否唯一
+     *
+     * @param userName 用户名称
+     * @return 结果
+     */
+    public int checkUserNameUnique(String userName);
 }

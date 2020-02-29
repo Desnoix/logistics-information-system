@@ -2,6 +2,7 @@ package com.yjq.user.controller;
 
 import com.yjq.user.pojo.User;
 import com.yjq.user.service.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/auth")
+@Api(tags = "用户注册接口")
 public class AuthController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;

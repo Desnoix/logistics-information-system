@@ -44,7 +44,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         try {
             LoginUser loginUser = new ObjectMapper().readValue(request.getInputStream(), LoginUser.class);
             rememberMe.set(loginUser.getRememberMe());
-            rememberMe.set(0);
+            rememberMe.set(1);
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword(), new ArrayList<>())
             );
@@ -79,7 +79,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 但是这里创建的token只是单纯的token
         // 按照jwt的规定，最后请求的时候应该是 `Bearer token`
         //response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
-        data.put("token",JwtTokenUtils.TOKEN_PREFIX + token);
+        data.put("token",token);
         request.setAttribute("data",data);
         request.getRequestDispatcher("/common/successLoginToJson").forward(request, response);
     }

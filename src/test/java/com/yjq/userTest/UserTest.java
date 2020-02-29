@@ -1,9 +1,5 @@
 package com.yjq.userTest;
 
-import com.yjq.user.pojo.User;
-import com.yjq.user.service.UserService;
-import com.yjq.user.service.impl.UserServiceImpl;
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
@@ -16,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class UserTest {
 
-    @Test
+/*    @Test
     void test(){
         UserService userService= new UserServiceImpl();
         User user = new User();
@@ -35,6 +31,6 @@ public class UserTest {
         User s = userService.findUser("123");
         System.out.println(s.toString());
 
-    }
+    }*/
 
 }
