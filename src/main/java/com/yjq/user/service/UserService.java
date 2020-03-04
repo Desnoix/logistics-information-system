@@ -2,6 +2,8 @@ package com.yjq.user.service;
 
 import com.yjq.user.pojo.User;
 
+import java.util.List;
+
 public interface UserService {
     /**
      *
@@ -23,7 +25,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    public String addUser(User user);
+    public int addUser(User user);
 
     /**
      * 校验用户名称是否唯一
@@ -32,5 +34,12 @@ public interface UserService {
      * @return 结果
      */
     public boolean checkUserNameUnique(String userName);
+
+    /**
+     * 获取所有用户信息
+     * @param user
+     * @return
+     */
+    public List<User> selectUserList(User user);
 
 }

@@ -12,23 +12,79 @@
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
     <result column="ACCOUNT" jdbcType="VARCHAR" property="account" />
     <result column="EMAIL" jdbcType="VARCHAR" property="email" />
-    <result column="STATUS" jdbcType="VARCHAR" property="status" />
-    <result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="ROLE" jdbcType="VARCHAR" property="role" />
+    <result column="DEPT_ID" jdbcType="INTEGER" property="deptId" />
+    <result column="DELETED" jdbcType="INTEGER" property="deleted" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="PHONE_NUMBER" jdbcType="VARCHAR" property="phoneNumber" />
+    <association property="department" column="dept_id" javaType="com.yjq.dept.pojo.Department" resultMap="deptResult"/>
   </resultMap>
 
-  <select id="selectById" parameterType="java.lang.Long" resultType="com.yjq.user.pojo.User">
+  <resultMap id="deptResult" type="com.yjq.dept.pojo.Department">
+    <result column="ID" jdbcType="INTEGER" property="id"/>
+    <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName"/>
+    <result column="STATUS" jdbcType="INTEGER" property="status"/>
+    <result column="DELETED" jdbcType="INTEGER" property="deleted"/>
+    <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+    <result column="LEADER" jdbcType="VARCHAR" property="leader"/>
+    <result column="PHONE" jdbcType="VARCHAR" property="phone"/>
+    <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
+  </resultMap>
+
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select * from user where id = #{id}
   </select>
-  <select id="selectByNameAndPw"  resultType="com.yjq.user.pojo.User">
+  <select id="selectByNameAndPw"  resultMap="BaseResultMap">
     select * from user where name = #{username} AND password = #{password}
   </select>
-  <select id="findByUsername"  resultType="com.yjq.user.pojo.User">
+  <select id="findByUsername"  resultMap="BaseResultMap">
     select * from user where name = #{username}
   </select>
   <insert id="addUser" parameterType="com.yjq.user.pojo.User" useGeneratedKeys="true" keyProperty="id">
-    insert into user(`NAME`,`PASSWORD`,`ROLE`,`CREATE_TIME`) VALUES (#{name},#{password},#{role},#{createTime})
+    insert into user(
+      <if test="id != null ">ID,</if>
+      <if test="name != null">NAME,</if>
+      <if test="password != null">PASSWORD,</if>
+      <if test="account != null and account != ``">ACCOUNT,</if>
+      <if test="email != null">EMAIL,</if>
+      <if test="status != null ">STATUS,</if>
+      <if test="role != null">ROLE,</if>
+      <if test="deptId != null and deptId != ``">DEPT_ID,</if>
+      <if test="deleted != null">DELETED,</if>
+      <if test="phoneNumber != null and phoneNumber != ``">PHONE_NUMBER,</if>
+        CREATE_TIME
+    )VALUES(
+      <if test="id != null ">#{id},</if>
+      <if test="name != null">#{name},</if>
+      <if test="password != null">#{password},</if>
+      <if test="account != null and account != ``">#{account},</if>
+      <if test="email != null">#{email},</if>
+      <if test="status != null ">#{status},</if>
+      <if test="role != null">#{role},</if>
+      <if test="deptId != null and deptId != ``">#{deptId},</if>
+      <if test="deleted != null ">#{deleted},</if>
+      <if test="phoneNumber != null and phoneNumber != ``">#{phoneNumber},</if>
+        #{createTime}
+    )
   </insert>
+  <select id="selectUserList" resultMap="BaseResultMap">
+    SELECT * FROM user u left join deptartment d on u.DEPT_ID = d.id
+    WHERE u.deleted='0' and d.deleted='0'
+    <if test="name != null and name !=''">
+      AND u.name = #{name}
+    </if>
+    <if test="status != null" >
+      AND u.status = #{status}
+    </if>
+    <if test="phoneNumber != null and phoneNumber !=''">
+      AND u.PHONE_NUMBER = #{phoneNumber}
+    </if>
+    <if test="deptId != null and deptId !=''">
+      AND u.DEPT_ID = #{deptId}
+    </if>
 
+  </select>
 
 
 

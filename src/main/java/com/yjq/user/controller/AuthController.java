@@ -37,8 +37,8 @@ public class AuthController {
         // 记得注册的时候把密码加密一下
         user.setPassword(bCryptPasswordEncoder.encode(registerUser.get("password")));
         user.setRole("ROLE_USER");
-        String save = userService.addUser(user);
-        return save.toString();
+        int save = userService.addUser(user);
+        return "成功";
     }
 
 

@@ -1,14 +1,6 @@
 package com.yjq.deptTest;
 
-import com.yjq.dept.dao.DepartmentMapper;
-import com.yjq.dept.pojo.Department;
-import com.yjq.dept.service.DeptService;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.StringUtils;
-
-import java.util.List;
 
 /**
  * @ClassName DeptTest
@@ -19,7 +11,7 @@ import java.util.List;
  */
 @SpringBootTest
 public class DeptTest {
-    @Autowired
+/*    @Autowired
     DepartmentMapper departmentMapper;
     @Autowired
     DeptService deptService;
@@ -65,5 +57,5 @@ public class DeptTest {
         department.setDeptName("asdsa");
         List<Department> department1 = deptService.selectByname(department);
         System.out.println(department1.toString());
-    }
+    }*/
 }

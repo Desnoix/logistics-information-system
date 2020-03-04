@@ -54,3 +54,6 @@ mybatis:
   mapper-locations: classpath:mapper/**/*.xml
   # pojo生成包地址
   type-aliases-package: com.yjq.user.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true #开启驼峰命名规则自动转换

@@ -4,6 +4,8 @@ import com.yjq.user.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
 
@@ -13,13 +15,7 @@ public interface UserMapper {
 
     public User findByUsername(@Param("username") String username);
 
-    public Integer addUser(User user);
+    public int addUser(User user);
 
-    /**
-     * 校验用户名称是否唯一
-     *
-     * @param userName 用户名称
-     * @return 结果
-     */
-    public int checkUserNameUnique(String userName);
+    public List<User> selectUserList(User user);
 }

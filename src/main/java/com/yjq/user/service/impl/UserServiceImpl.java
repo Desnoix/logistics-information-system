@@ -4,8 +4,10 @@ import com.yjq.user.dao.UserMapper;
 import com.yjq.user.pojo.User;
 import com.yjq.user.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @ClassName UserDetailsServiceImpl
@@ -43,29 +45,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String addUser(User user) {
-
-        Integer i = 0;
-
-        try {
-            i = userMapper.addUser(user);
-        } catch (Exception e) {
-            e.printStackTrace();
-            i = -1;
-            return "插入失败";
-        }
-
-        return "插入成功";
+    public int addUser(User user) {
+        return userMapper.addUser(user);
     }
 
     @Override
     public boolean checkUserNameUnique(String userName)
     {
-        int count = userMapper.checkUserNameUnique(userName);
-        if (count > 0)
+        User count = userMapper.findByUsername(userName);
+        if (!StringUtils.isEmpty(count))
         {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<User> selectUserList(User user) {
+        return userMapper.selectUserList(user);
     }
 }

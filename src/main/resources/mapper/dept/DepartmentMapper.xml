@@ -13,7 +13,7 @@
         <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
     </resultMap>
 
-    <insert id="addDept" parameterType="com.yjq.dept.pojo.Department">
+    <insert id="addDept" parameterType="com.yjq.dept.pojo.Department" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO deptartment(`id`,`dept_name`,`status`,`deleted`,`create_time`,`LEADER`,`PHONE`,`EMAIL`)
         VALUES (#{id},#{deptName},#{status},#{deleted},#{createTime},#{leader},#{phone},#{email})
     </insert>

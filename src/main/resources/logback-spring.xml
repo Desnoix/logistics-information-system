@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <property name="maxsize" value="30MB" />
+
+    <property name="maxdays" value="90" />
+
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                <pattern>%d{HH:mm:ss.SSS} [%-5level] %logger{36} - %msg%n</pattern>
+            </pattern>
+        </layout>
+    </appender>
+
+
+    <root level="INFO">
+        <appender-ref ref="consoleLog"/>
+    </root>
+
+    <logger name="com.yjq" level="DEBUG" additivity="false">
+        <appender-ref ref="consoleLog"/>
+    </logger>
+
+
+</configuration>
