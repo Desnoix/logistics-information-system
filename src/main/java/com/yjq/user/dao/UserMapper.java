@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    public User selectById(@Param("id")Long id);
+    public User selectById(@Param("id")Integer id);
 
     public User selectByNameAndPw(@Param("username")String username, @Param("password") String password);
 
@@ -17,5 +17,9 @@ public interface UserMapper {
 
     public int addUser(User user);
 
+    public int updateUser(User user);
+
     public List<User> selectUserList(User user);
+
+
 }

@@ -50,6 +50,45 @@ public class UserController extends BaseController {
 
     }
 
+    @GetMapping("/{userId}")
+    @ApiOperation("根据id获取用户信息")
+    public Map<String,Object> getUserById(@PathVariable("userId") Integer id){
+        User user = userService.selectUserById(id);
+        return ResultVO.success(user);
+    }
+
+    @PutMapping
+    @ApiOperation("更新用户信息")
+    public Map<String,Object> updateUser(@RequestBody @Validated User user){
+        int i = userService.updateUser(user);
+        return toResult(i);
+    }
+
+    @PutMapping("/updatePwd")
+    @ApiOperation("重置用户密码")
+    public Map<String,Object> updatePwd(@RequestBody @Validated User user){
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        int i = userService.updateUser(user);
+        return toResult(i);
+    }
+
+    @DeleteMapping("/{userId}")
+    @ApiOperation("删除用户")
+    public  Map<String,Object> deleteUser(@PathVariable("userId") Integer[] userId){
+        for (int i = 0;i<userId.length;i++) {
+            User user = userService.selectUserById(userId[i]);
+            user.setDeleted(1);
+            userService.updateUser(user);
+        }
+        return ResultVO.success();
+    }
+
+    @PostMapping("/logout")
+    @ApiOperation("退出登陆")
+    public Map<String,Object> logout(){
+        System.out.println("=============用户退出成功=====================");
+       return ResultVO.success();
+    }
 
     @GetMapping("/getInfo")
     @ApiOperation("根据token获取用户信息")
@@ -68,5 +107,6 @@ public class UserController extends BaseController {
         List<User> list = userService.selectUserList(user);
         return ResultVO.success(list);
     }
+
 
 }

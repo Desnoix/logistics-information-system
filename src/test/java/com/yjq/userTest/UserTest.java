@@ -60,6 +60,17 @@ public class UserTest {
         System.out.println(users.toString());
 
     }
+    @Test
+    void testMapper2(){
+        User user = new User();
+        user.setId(1);
+        user.setName("admin");
+        user.setEmail("12313@weww.com");
+
+        int i = userService.updateUser(user);
+        System.out.println(i);
+
+    }
 
 
 }

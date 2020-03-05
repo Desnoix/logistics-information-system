@@ -33,7 +33,7 @@
   </resultMap>
 
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select * from user where id = #{id}
+    select * from user u left join deptartment d on u.DEPT_ID=d.ID where u.id = #{id}
   </select>
   <select id="selectByNameAndPw"  resultMap="BaseResultMap">
     select * from user where name = #{username} AND password = #{password}
@@ -83,8 +83,23 @@
     <if test="deptId != null and deptId !=''">
       AND u.DEPT_ID = #{deptId}
     </if>
-
   </select>
+
+  <update id="updateUser" parameterType="com.yjq.user.pojo.User">
+    UPDATE user
+    <set>
+      <if test="name != null">NAME = #{name},</if>
+      <if test="password != null">PASSWORD = #{password},</if>
+      <if test="account != null and account != ``">ACCOUNT = #{account},</if>
+      <if test="email != null">EMAIL = #{email},</if>
+      <if test="status != null ">STATUS = #{status},</if>
+      <if test="role != null">ROLE = #{role},</if>
+      <if test="deptId != null">DEPT_ID =  #{deptId},</if>
+      <if test="deleted != null "> DELETED = #{deleted},</if>
+      <if test="phoneNumber != null and phoneNumber != ``">PHONE_NUMBER =  #{phoneNumber},</if>
+    </set>
+    WHERE ID = #{id}
+  </update>
 
 
 

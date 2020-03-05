@@ -42,4 +42,18 @@ public interface UserService {
      */
     public List<User> selectUserList(User user);
 
+
+    /**
+     * 根据id获取用户信息
+     * @param id
+     * @return
+     */
+    public User selectUserById(Integer id);
+
+    /***
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    public int updateUser(User user);
 }
