@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yjq.goods.dao.GoodsMapper">
+
+    <resultMap id="BaseResultMap" type="com.yjq.goods.pojo.Goods" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR" />
+        <result column="GOODS_NUMBER" property="goodsNumber" jdbcType="VARCHAR" />
+        <result column="GOODS_TYPE_ID" property="goodsTypeId" jdbcType="INTEGER" />
+        <result column="GOODS_AMOUNT" property="goodsAmount" jdbcType="INTEGER" />
+        <result column="STATUS" property="status" jdbcType="INTEGER" />
+        <result column="DEPT_ID" property="deptId" jdbcType="INTEGER" />
+        <result column="DELETED" property="deleted" jdbcType="INTEGER" />
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+        <association property="goodsType" resultMap="goodsTypeResultMap" />
+    </resultMap>
+    <resultMap id="goodsTypeResultMap" type="com.yjq.goods.pojo.GoodsType" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="TYPE_NAME" property="typeName" jdbcType="VARCHAR" />
+        <result column="DELETED" property="deleted" jdbcType="INTEGER" />
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ID, GOODS_NAME, GOODS_NUMBER, GOODS_TYPE_ID, GOODS_AMOUNT, STATUS, DEPT_ID, DELETED,
+        CREATE_TIME
+    </sql>
+
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+            <include refid="Base_Column_List" />
+        from goods
+            where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectGoodsList" resultMap="BaseResultMap" parameterType="com.yjq.goods.pojo.Goods" >
+        select
+            *
+        from goods g left join goods_type gt on g.GOODS_TYPE_ID = gt.id
+        WHERE g.deleted = 0 AND gt.deleted = 0
+        <if test="goodsName != null" >AND g.GOODS_NAME = #{goodsName,jdbcType=VARCHAR}</if>
+        <if test="goodsNumber != null" >AND g.GOODS_NUMBER =  #{goodsNumber,jdbcType=VARCHAR}</if>
+        <if test="goodsTypeId != null" >AND g.GOODS_TYPE_ID = #{goodsTypeId,jdbcType=INTEGER}</if>
+        <if test="goodsAmount != null" >AND g.GOODS_AMOUNT = #{goodsAmount,jdbcType=INTEGER}</if>
+        <if test="status != null" >AND g.STATUS = #{status,jdbcType=INTEGER}</if>
+        <if test="deptId != null" >AND g.DEPT_ID = #{deptId,jdbcType=INTEGER}</if>
+        <if test="createTime != null" >AND g.CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}</if>
+    </select>
+
+    <insert id="insert" parameterType="com.yjq.goods.pojo.Goods" >
+        insert into goods
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="goodsName != null" >GOODS_NAME,</if>
+            <if test="goodsNumber != null" >GOODS_NUMBER,</if>
+            <if test="goodsTypeId != null" >GOODS_TYPE_ID,</if>
+            <if test="goodsAmount != null" >GOODS_AMOUNT,</if>
+            <if test="status != null" >STATUS,</if>
+            <if test="deptId != null" >DEPT_ID,</if>
+            <if test="deleted != null" >DELETED,</if>
+            <if test="createTime != null" >CREATE_TIME,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="goodsName != null" >#{goodsName,jdbcType=VARCHAR},</if>
+            <if test="goodsNumber != null" >#{goodsNumber,jdbcType=VARCHAR},</if>
+            <if test="goodsTypeId != null" >#{goodsTypeId,jdbcType=INTEGER},</if>
+            <if test="goodsAmount != null" >#{goodsAmount,jdbcType=INTEGER},</if>
+            <if test="status != null" >#{status,jdbcType=INTEGER},</if>
+            <if test="deptId != null" >#{deptId,jdbcType=INTEGER},</if>
+            <if test="deleted != null" >#{deleted,jdbcType=INTEGER},</if>
+            <if test="createTime != null" >#{createTime,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+
+    <update id="updateGoods" parameterType="com.yjq.goods.pojo.Goods" >
+        update goods
+        <set>
+            <if test="goodsName != null" >GOODS_NAME = #{goodsName,jdbcType=VARCHAR},</if>
+            <if test="goodsNumber != null" >GOODS_NUMBER = #{goodsNumber,jdbcType=VARCHAR},</if>
+            <if test="goodsTypeId != null" >GOODS_TYPE_ID = #{goodsTypeId,jdbcType=INTEGER},</if>
+            <if test="goodsAmount != null" >GOODS_AMOUNT = #{goodsAmount,jdbcType=INTEGER},</if>
+            <if test="status != null" >STATUS = #{status,jdbcType=INTEGER},</if>
+            <if test="deptId != null" >DEPT_ID = #{deptId,jdbcType=INTEGER},</if>
+            <if test="deleted != null" >DELETED = #{deleted,jdbcType=INTEGER},</if>
+            <if test="createTime != null" >CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},</if>
+        </set>
+        WHERE ID = #{id}
+    </update>
+
+</mapper>

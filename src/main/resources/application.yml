@@ -55,5 +55,5 @@ mybatis:
   # pojo生成包地址
   type-aliases-package: com.yjq.user.pojo
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #sql打印
     map-underscore-to-camel-case: true #开启驼峰命名规则自动转换

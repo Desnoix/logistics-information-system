@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yjq.goods.dao.GoodsTypeMapper">
+    <resultMap id="BaseResultMap" type="com.yjq.goods.pojo.GoodsType" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="TYPE_NAME" property="typeName" jdbcType="VARCHAR" />
+        <result column="DELETED" property="deleted" jdbcType="INTEGER" />
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ID, TYPE_NAME, DELETED, CREATE_TIME
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from goods_type
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectGoodsTypeList" resultMap="BaseResultMap" parameterType="com.yjq.goods.pojo.GoodsType">
+        select * from goods_type where DELETED = 0
+        <if test="typeName != null">AND TYPE_NAME = #{typeName}</if>
+        <if test="createTime != null">AND CREATE_TIME = #{createTime}</if>
+    </select>
+
+    <insert id="insert" parameterType="com.yjq.goods.pojo.GoodsType" >
+        insert into goods_type
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="typeName != null" >
+                TYPE_NAME,
+            </if>
+            <if test="deleted != null" >
+                DELETED,
+            </if>
+            <if test="createTime != null" >
+                CREATE_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="typeName != null" >
+                #{typeName,jdbcType=VARCHAR},
+            </if>
+            <if test="deleted != null" >
+                #{deleted,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateGoodsType" parameterType="com.yjq.goods.pojo.GoodsType" >
+        update goods_type
+        <set >
+            <if test="record.typeName != null" >
+                TYPE_NAME = #{record.typeName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deleted != null" >
+                DELETED = #{record.deleted,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null" >
+                CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE ID = #{id}
+    </update>
+</mapper>
