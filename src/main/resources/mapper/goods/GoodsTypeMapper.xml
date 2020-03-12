@@ -21,6 +21,7 @@
 
     <select id="selectGoodsTypeList" resultMap="BaseResultMap" parameterType="com.yjq.goods.pojo.GoodsType">
         select * from goods_type where DELETED = 0
+        <if test="id != null">AND ID = #{id}</if>
         <if test="typeName != null">AND TYPE_NAME = #{typeName}</if>
         <if test="createTime != null">AND CREATE_TIME = #{createTime}</if>
     </select>
@@ -54,14 +55,14 @@
     <update id="updateGoodsType" parameterType="com.yjq.goods.pojo.GoodsType" >
         update goods_type
         <set >
-            <if test="record.typeName != null" >
-                TYPE_NAME = #{record.typeName,jdbcType=VARCHAR},
+            <if test="typeName != null" >
+                TYPE_NAME = #{typeName,jdbcType=VARCHAR},
             </if>
-            <if test="record.deleted != null" >
-                DELETED = #{record.deleted,jdbcType=INTEGER},
+            <if test="deleted != null" >
+                DELETED = #{deleted,jdbcType=INTEGER},
             </if>
-            <if test="record.createTime != null" >
-                CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+            <if test="createTime != null" >
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
             </if>
         </set>
         WHERE ID = #{id}

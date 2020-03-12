@@ -45,7 +45,7 @@ public class GoodsController extends BaseController {
     }
 
     @GetMapping
-    @ApiOperation("获取部门列表")
+    @ApiOperation("获取物品列表")
     public Map<String,Object> goodsList(@RequestBody Goods goods){
         List<Goods> goodsList = goodsService.selectGoodsList(goods);
         return ResultVO.success(goodsList);
