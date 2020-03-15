@@ -20,10 +20,9 @@ public class ResultVO implements Serializable {
      * 返回的code为默认
      * @param message
      * @param data
-     * @param jwtToken
      * @return
      */
-    public final static Map<String, Object> success(String message, Object data, String jwtToken, Boolean success) {
+    public final static Map<String, Object> success(String message, Object data, Boolean success) {
         Map<String, Object> map = new HashMap<>();
         map.put("code", ResultEnum.SUCCESS.getCode());
         map.put("message", message);
@@ -50,6 +49,15 @@ public class ResultVO implements Serializable {
         map.put("code", ResultEnum.SUCCESS.getCode());
         map.put("message", ResultEnum.SUCCESS.getMessage());
         map.put("data", data);
+        map.put("success",true);
+        return map;
+    }
+    public final static  Map<String, Object> success(Object data,Integer total) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", ResultEnum.SUCCESS.getCode());
+        map.put("message", ResultEnum.SUCCESS.getMessage());
+        map.put("data", data);
+        map.put("total", total);
         map.put("success",true);
         return map;
     }

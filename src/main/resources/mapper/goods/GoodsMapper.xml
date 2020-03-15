@@ -36,8 +36,9 @@
     <select id="selectGoodsList" resultMap="BaseResultMap" parameterType="com.yjq.goods.pojo.Goods" >
         select
             *
-        from goods g left join goods_type gt on g.GOODS_TYPE_ID = gt.id
+        from goods g left join goods_type gt on g.GOODS_TYPE_ID = gt.ID
         WHERE g.deleted = 0 AND gt.deleted = 0
+        <if test="id != null" >AND g.ID = #{id}</if>
         <if test="goodsName != null" >AND g.GOODS_NAME = #{goodsName,jdbcType=VARCHAR}</if>
         <if test="goodsNumber != null" >AND g.GOODS_NUMBER =  #{goodsNumber,jdbcType=VARCHAR}</if>
         <if test="goodsTypeId != null" >AND g.GOODS_TYPE_ID = #{goodsTypeId,jdbcType=INTEGER}</if>

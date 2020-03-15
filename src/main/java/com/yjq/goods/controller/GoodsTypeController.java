@@ -64,4 +64,16 @@ public class GoodsTypeController extends BaseController {
         return  toResult(i);
     }
 
+    @DeleteMapping("/{ids}")
+    @ApiOperation("删除物品类型")
+    public Map<String,Object> delGoodsTpe(@PathVariable("ids") Integer[] ids){
+        GoodsType goodsType = new GoodsType();
+        for(int i = 0;i<ids.length;i++){
+            goodsType.setId(ids[i]);
+            goodsType.setDeleted(1);
+            goodsTypeService.updateGoods(goodsType);
+        }
+        return ResultVO.success();
+    }
+
 }
