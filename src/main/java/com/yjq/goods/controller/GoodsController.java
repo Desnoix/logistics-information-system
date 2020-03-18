@@ -39,7 +39,6 @@ public class GoodsController extends BaseController {
     @ApiOperation("增加物品接口")
     public Map<String,Object> addGoods(@RequestBody Goods goods){
         goods.setCreateTime(new Date());
-        goods.setGoodsNumber(dateUtils.getSystemTime());
         goods.setStatus(1);
         goods.setDeleted(0);
         int insert = goodsService.insert(goods);
@@ -56,8 +55,8 @@ public class GoodsController extends BaseController {
 
 
     @GetMapping("/{goodsId}")
-    @ApiOperation("获取物品列表")
-    public Map<String,Object> goodsTypeList(@PathVariable("goodsId") Integer id ){
+    @ApiOperation("获取物品")
+    public Map<String,Object> goodsList(@PathVariable("goodsId") Integer id ){
         Goods goods = goodsService.selectById(id);
         return ResultVO.success(goods);
     }
@@ -73,7 +72,7 @@ public class GoodsController extends BaseController {
 
     @DeleteMapping("/{ids}")
     @ApiOperation("删除物品")
-    public Map<String,Object> delGoodsTpe(@PathVariable("ids") Integer[] ids){
+    public Map<String,Object> delGoods(@PathVariable("ids") Integer[] ids){
         Goods goods = new Goods();
         for(int i = 0;i<ids.length;i++){
             goods.setId(ids[i]);

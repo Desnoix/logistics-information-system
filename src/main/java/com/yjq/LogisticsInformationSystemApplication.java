@@ -27,7 +27,7 @@ public class LogisticsInformationSystemApplication {
 
     @Bean
     public CorsFilter corsFilter() {
-        System.out.println("=============== 设置跨域过滤器 ================");
+//        System.out.println("=============== 设置跨域过滤器 ================");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", buildConfig());
         return new CorsFilter(source);
